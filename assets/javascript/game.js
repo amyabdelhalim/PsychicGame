@@ -8,33 +8,48 @@ var floorRandom = Math.floor(random)
 // console.log(floorRandom)
 // var random = Math.floor( Math.random() * alphabet.length )
 var computerChoice = alphabet[floorRandom]
+
 console.log(computerChoice)
 
 // counters
 var wins = 0
 var loses = 0
 var guessesLeft = 10
+var guessesString = ''
+var guessesSoFar = []
 
 function render(){
     document.querySelector(".guesses-left").innerText = guessesLeft
     document.querySelector(".wins").innerText = wins
     document.querySelector(".loses").innerText = loses
+    document.querySelector(".guessFar").innerText = guessesString
 }
 
 document.onkeyup = function (event) {
     console.log(event.key)
     var userChoice = event.key
+    guessesSoFar.push(userChoice)
+    guessesString = ''
+    console.log(computerChoice);
+
+    for (let i = 0; i < guessesSoFar.length; i++) {
+        guessesString += guessesSoFar[i] + ', ';
+        
+    }
+    console.log(guessesSoFar);
+    console.log(guessesString);
     
+        
     guessesLeft = guessesLeft - 1
-    // guessesLeft--
-    // guessesLeft += 1
 
     if (computerChoice === userChoice) {
-        console.log("You WIN!")
+        alert("You WIN!")
+        wins++ 
     }
     else {
         if (guessesLeft < 1) {
-            console.log("You LOSE!")
+            alert("You LOSE!")
+            loses++
         }
     }
 
